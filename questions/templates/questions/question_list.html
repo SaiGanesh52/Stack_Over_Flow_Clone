@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Questions</title>
+</head>
+
+<body>
+
+    <h1>Questions</h1>
+
+    {% for question in questions %}
+
+    <div>
+        <h2>
+            <a href="{% url 'question_detail' question.id %}">
+                {{ question.title }}
+            </a>
+        </h2>
+
+        <p>{{ question.content }}</p>
+
+        <p>
+            Asked by: {{ question.author.username }}
+        </p>
+
+        <p>
+            Created: {{ question.created_at }}
+        </p>
+    </div>
+
+    <hr>
+
+    {% empty %}
+
+    <p>No questions available.</p>
+
+    {% endfor %}
+
+</body>
+
+</html>

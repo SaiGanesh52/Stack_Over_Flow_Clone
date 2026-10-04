@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ question.title }}</title>
+</head>
+<body>
+
+    <h1>{{ question.title }}</h1>
+
+    <p>{{ question.content }}</p>
+
+    <hr>
+
+    <p>
+        Asked by: {{ question.author.username }}
+    </p>
+
+    <p>
+        Created: {{ question.created_at }}
+    </p>
+
+    <p>
+        Updated: {{ question.updated_at }}
+    </p>
+
+    <a href="{% url 'question_list' %}">
+        Back to Questions
+    </a>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Tags - Stack Overflow{% endblock %}
+{% block content %}
+<main class="main-content">
+  <div class="page-header"><h1>Tags</h1></div>
+  <p class="text-muted text-sm" style="margin-bottom:16px;">A tag is a keyword or label that categorizes your question with other, similar questions.</p>
+  <div class="tag-controls">
+    <form method="get" class="tag-search-form">
+      <input type="text" name="q" value="{{ search }}" class="form-control"
+             placeholder="Search tags…" aria-label="Search tags">
+      <input type="hidden" name="sort" value="{{ sort }}">
+    </form>
+    <div class="filter-tabs">
+      <a class="filter-tab {% if sort == 'popular' %}active{% endif %}" href="?sort=popular{% if search %}&q={{ search|urlencode }}{% endif %}">Popular</a>
+      <a class="filter-tab {% if sort == 'name' %}active{% endif %}" href="?sort=name{% if search %}&q={{ search|urlencode }}{% endif %}">Name</a>
+      <a class="filter-tab {% if sort == 'new' %}active{% endif %}" href="?sort=new{% if search %}&q={{ search|urlencode }}{% endif %}">New</a>
+    </div>
+  </div>
+  <div class="tags-grid">
+    {% for tag in page.object_list %}
+    <div class="tag-card">
+      <a href="{% url 'tag_detail' tag.slug %}" class="tag">{{ tag.name }}</a>
+      <div class="tag-description">{{ tag.description|default:"No description yet."|truncatechars:80 }}</div>
+      <div class="tag-usage">{{ tag.usage }} question{{ tag.usage|pluralize }} tagged</div>
+    </div>
+    {% empty %}
+    <div class="empty-state" style="grid-column:1/-1;">
+      <div class="empty-icon">🏷️</div>
+      <h3>No tags found</h3>
+      <p>Tags are created automatically when you ask a question.</p>
+    </div>
+    {% endfor %}
+  </div>
+</main>
+<aside class="right-sidebar"></aside>
+{% endblock %}

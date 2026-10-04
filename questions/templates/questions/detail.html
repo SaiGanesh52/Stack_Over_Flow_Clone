@@ -1,0 +1,22 @@
+{% if request.user.is_authenticated %}
+    <button
+        class="action-link save-question-btn bookmark-btn {% if is_bookmarked %}active{% endif %}"
+        data-id="{{ question.pk }}"
+        title="{% if is_bookmarked %}Remove from saved questions{% else %}Save this question{% endif %}"
+    >
+        <span class="material-symbols-outlined">bookmark</span>
+
+        <span class="bookmark-label">
+            {% if is_bookmarked %}
+                Saved
+            {% else %}
+                Save
+            {% endif %}
+        </span>
+    </button>
+{% else %}
+    <a href="{% url 'login' %}?next={{ request.path }}" class="action-link">
+        <span class="material-symbols-outlined">bookmark</span>
+        Save
+    </a>
+{% endif %}
