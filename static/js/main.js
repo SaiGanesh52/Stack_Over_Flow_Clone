@@ -133,8 +133,25 @@ function initBookmark() {
   });
 }
 
+function initAvatarMenu() {
+    const avatarMenu = document.querySelector('.avatar-menu');
+    const avatarButton = document.querySelector('.avatar-btn');
+
+    if (!avatarMenu || !avatarButton) return;
+
+    avatarButton.addEventListener('click', function () {
+        avatarMenu.classList.toggle('open');
+    });
+
+    document.addEventListener('click', function (event) {
+        if (!avatarMenu.contains(event.target)) {
+            avatarMenu.classList.remove('open');
+        }
+    });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
-  initVoting();
-  initBookmark();
+    initVoting();
+    initBookmark();
+    initAvatarMenu();
 });

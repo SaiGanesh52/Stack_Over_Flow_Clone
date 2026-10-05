@@ -26,7 +26,6 @@ from .models import Bookmark, Question, QuestionImage, RecentlyViewed
 
 
 def get_visible_questions():
-    #"""Return questions that should be shown on public pages."""
     return (
         Question.objects.filter(is_deleted=False)
         .select_related('author', 'author__profile')
